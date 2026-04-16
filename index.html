@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ЛитКлуб 📚 — Школьная литература интерактивно</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+  <!-- Decorative background -->
+  <div class="bg-library">
+    <div class="bg-shelf shelf1"></div>
+    <div class="bg-shelf shelf2"></div>
+    <div class="bg-shelf shelf3"></div>
+    <div class="bg-light"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">📚 ЛитКлуб</a>
+      <button class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+      <div class="nav-links">
+        <a href="profile.html">👤 Профиль</a>
+        <span id="nav-xp" class="nav-badge">⭐ 0 XP</span>
+        <span id="nav-streak" class="nav-badge">🔥 0</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">✨ Интерактивный учебник по литературе</div>
+      <h1>Читай, обсуждай,<br>проходи <span>квесты!</span></h1>
+      <p class="hero-sub">Изучай школьную программу через погружение в сюжеты. Обсуждай произведения с AI-литературоведом. Пиши лучшие эссе.</p>
+      
+      <div class="grades-grid">
+        <h2>Выбери класс:</h2>
+        <div class="grade-cards">
+          <a href="grades/5/index.html" class="grade-card">
+            <div class="grade-number">5</div>
+            <div class="grade-name">класс</div>
+            <div class="grade-works">📝 Приключения, сказки</div>
+          </a>
+          <a href="grades/6/index.html" class="grade-card">
+            <div class="grade-number">6</div>
+            <div class="grade-name">класс</div>
+            <div class="grade-works">📝 Русская классика</div>
+          </a>
+          <a href="grades/7/index.html" class="grade-card">
+            <div class="grade-number">7</div>
+            <div class="grade-name">класс</div>
+            <div class="grade-works">📝 Поэзия, драма</div>
+          </a>
+          <a href="grades/8/index.html" class="grade-card">
+            <div class="grade-number">8</div>
+            <div class="grade-name">класс</div>
+            <div class="grade-works">📝 Роман, повесть</div>
+          </a>
+          <a href="grades/9/index.html" class="grade-card">
+            <div class="grade-number">9</div>
+            <div class="grade-name">класс</div>
+            <div class="grade-works">📝 XX век</div>
+          </a>
+          <a href="grades/10/index.html" class="grade-card">
+            <div class="grade-number">10</div>
+            <div class="grade-name">класс</div>
+            <div class="grade-works">📝 Мировая литература</div>
+          </a>
+          <a href="grades/11/index.html" class="grade-card">
+            <div class="grade-number">11</div>
+            <div class="grade-name">класс</div>
+            <div class="grade-works">📝 Современность</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="container">
+      <h2>Что тебя ждёт:</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📖</div>
+          <h3>Краткие содержания</h3>
+          <p>Вся суть произведения за 5 минут чтения</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💬</div>
+          <h3>AI-дискуссии</h3>
+          <p>Обсуждай образы и символизм с виртуальным литературоведом</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎮</div>
+          <h3>Квесты по сюжету</h3>
+          <p>Погрузись в книгу через интерактивные визуальные новеллы</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">✍️</div>
+          <h3>Примеры эссе</h3>
+          <p>Готовые сочинения для вдохновения</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🏆</div>
+          <h3>Достижения</h3>
+          <p>Зарабатывай XP за чтение и прохождение квестов</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔥</div>
+          <h3>Стрик</h3>
+          <p>Заходи каждый день и поддерживай серию</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>📚 ЛитКлуб — изучай литературу с удовольствием</p>
+      <p class="footer-sub">Школьная программа 5-11 классов</p>
+    </div>
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script>
+    // Update XP and streak display
+    document.addEventListener('DOMContentLoaded', () => {
+      const progress = window.LitClubStorage.getProgress();
+      document.getElementById('nav-xp').textContent = `⭐ ${progress.xp} XP`;
+      document.getElementById('nav-streak').textContent = `🔥 ${progress.streak}`;
+    });
+  </script>
+</body>
+</html>
