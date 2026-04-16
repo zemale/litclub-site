@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Обсуждение — ЛитКлуб 📚</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <style>
+    .discussion-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 70px);
+    }
+    .work-info {
+      background: var(--color-paper);
+      padding: 20px;
+      border-radius: var(--radius);
+      border: 2px solid var(--color-primary);
+      margin-bottom: 20px;
+    }
+    .work-info h1 {
+      font-size: 1.5rem;
+      color: var(--color-dark);
+      margin-bottom: 5px;
+    }
+    .work-info p {
+      color: var(--color-text-light);
+    }
+    .chat-container {
+      flex: 1;
+      background: var(--color-paper);
+      border-radius: var(--radius);
+      border: 2px solid var(--color-primary);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .message {
+      max-width: 80%;
+      padding: 12px 16px;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .message.user {
+      align-self: flex-end;
+      background: var(--color-primary);
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+    .message.ai {
+      align-self: flex-start;
+      background: rgba(139,69,19,0.1);
+      color: var(--color-dark);
+      border-bottom-left-radius: 4px;
+    }
+    .input-area {
+      padding: 15px;
+      border-top: 1px solid rgba(139,69,19,0.2);
+      display: flex;
+      gap: 10px;
+    }
+    .input-area input {
+      flex: 1;
+      padding: 12px 20px;
+      border: 2px solid var(--color-primary);
+      border-radius: 25px;
+      font-family: inherit;
+      font-size: 1rem;
+      outline: none;
+    }
+    .input-area input:focus {
+      border-color: var(--color-secondary);
+    }
+    .input-area button {
+      padding: 12px 25px;
+      background: var(--color-secondary);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-family: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .input-area button:hover {
+      transform: scale(1.05);
+    }
+    .input-area button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .quick-questions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .quick-btn {
+      padding: 8px 16px;
+      background: rgba(139,69,19,0.1);
+      border: 1px solid var(--color-primary);
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .quick-btn:hover {
+      background: var(--color-primary);
+      color: white;
+    }
+    .typing {
+      display: flex;
+      gap: 5px;
+      padding: 12px 16px;
+      align-self: flex-start;
+    }
+    .typing-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--color-primary);
+      border-radius: 50%;
+      animation: typing 1.4s infinite;
+    }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typing {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">📚 ЛитКлуб</a>
+      <div class="nav-links">
+        <a href="profile.html">👤 Профиль</a>
+        <span class="nav-badge" id="nav-xp">⭐ 0 XP</span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="discussion-container">
+    <div class="work-info">
+      <h1 id="work-title">Загрузка...</h1>
+      <p id="work-author">...</p>
+    </div>
+
+    <div class="chat-container">
+      <div class="messages" id="messages">
+        <div class="message ai">
+          Привет! Я твой литературный помощник. Задай вопрос о произведении или выбери быстрый вопрос ниже. 📚
+        </div>
+      </div>
+
+      <div style="padding: 0 20px;">
+        <div class="quick-questions">
+          <button class="quick-btn" onclick="askQuick('О чём это произведение?')">О чём?</button>
+          <button class="quick-btn" onclick="askQuick('Кто главный герой?')">Главный герой</button>
+          <button class="quick-btn" onclick="askQuick('Темы и идеи')">Темы</button>
+          <button class="quick-btn" onclick="askQuick('Помоги с сочинением')">Сочинение ✍️</button>
+        </div>
+      </div>
+
+      <div class="input-area">
+        <input type="text" id="user-input" placeholder="Напиши вопрос..." onkeypress="if(event.key==='Enter')sendMessage()">
+        <button id="send-btn" onclick="sendMessage()">Отправить</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/gemini.js"></script>
+  <script>
+    let currentWork = null;
+    let messages = [];
+    const messagesContainer = document.getElementById('messages');
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+
+    // Get work ID from URL
+    const params = new URLSearchParams(window.location.search);
+    const workId = params.get('work');
+
+    async function loadWork() {
+      try {
+        const response = await fetch('data/works.json');
+        const data = await response.json();
+        currentWork = data.works.find(w => w.id === workId);
+        
+        if (!currentWork) {
+          document.getElementById('work-title').textContent = 'Произведение не найдено';
+          return;
+        }
+
+        document.getElementById('work-title').textContent = currentWork.title;
+        document.getElementById('work-author').textContent = `${currentWork.author}, ${currentWork.year}`;
+
+        // Load saved discussion
+        messages = window.LitClubStorage.getDiscussion(workId);
+        if (messages.length > 0) {
+          messagesContainer.innerHTML = messages.map(msg => 
+            `<div class="message ${msg.role}">${escapeHtml(msg.text)}</div>`
+          ).join('');
+          scrollToBottom();
+        }
+      } catch (error) {
+        console.error('Error loading work:', error);
+      }
+
+      // Update XP display
+      const progress = window.LitClubStorage.getProgress();
+      document.getElementById('nav-xp').textContent = `⭐ ${progress.xp} XP`;
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function scrollToBottom() {
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function showTyping() {
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'typing';
+      typingDiv.id = 'typing-indicator';
+      typingDiv.innerHTML = `
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+      `;
+      messagesContainer.appendChild(typingDiv);
+      scrollToBottom();
+    }
+
+    function hideTyping() {
+      const indicator = document.getElementById('typing-indicator');
+      if (indicator) indicator.remove();
+    }
+
+    async function sendMessage() {
+      const text = userInput.value.trim();
+      if (!text || !currentWork) return;
+
+      // Add user message
+      messages.push({ role: 'user', text });
+      messagesContainer.innerHTML += `<div class="message user">${escapeHtml(text)}</div>`;
+      userInput.value = '';
+      scrollToBottom();
+
+      // Disable input
+      sendBtn.disabled = true;
+      userInput.disabled = true;
+      showTyping();
+
+      // Get AI response
+      const response = await window.GeminiAPI.sendMessage(currentWork, text, messages);
+
+      hideTyping();
+      messages.push({ role: 'ai', text: response });
+      messagesContainer.innerHTML += `<div class="message ai">${escapeHtml(response)}</div>`;
+      scrollToBottom();
+
+      // Save discussion
+      window.LitClubStorage.saveDiscussion(workId, messages);
+
+      // Award XP for discussion
+      window.LitClubStorage.addXP(5);
+      const progress = window.LitClubStorage.getProgress();
+      document.getElementById('nav-xp').textContent = `⭐ ${progress.xp} XP`;
+
+      // Re-enable input
+      sendBtn.disabled = false;
+      userInput.disabled = false;
+      userInput.focus();
+    }
+
+    async function askQuick(question) {
+      userInput.value = question;
+      await sendMessage();
+    }
+
+    loadWork();
+  </script>
+</body>
+</html>

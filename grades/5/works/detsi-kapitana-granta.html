@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Дети капитана Гранта — ЛитКлуб 📚</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/base.css">
+  <style>
+    .work-detail {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .work-header {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-dark));
+      color: var(--color-cream);
+      padding: 40px;
+      border-radius: var(--radius);
+      margin-bottom: 30px;
+      position: relative;
+    }
+    .work-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    .work-meta {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .meta-item {
+      background: rgba(255,255,255,0.2);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--color-cream);
+      text-decoration: none;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    .content-section {
+      background: var(--color-paper);
+      padding: 30px;
+      border-radius: var(--radius);
+      border: 2px solid var(--color-primary);
+      margin-bottom: 20px;
+    }
+    .content-section h2 {
+      color: var(--color-primary);
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+    }
+    .content-section p {
+      line-height: 1.8;
+      margin-bottom: 15px;
+    }
+    .essay-list {
+      list-style: none;
+      padding: 0;
+    }
+    .essay-list li {
+      padding: 15px;
+      background: rgba(139,69,19,0.05);
+      border-radius: 10px;
+      margin-bottom: 10px;
+      border-left: 4px solid var(--color-secondary);
+    }
+    .action-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+    .btn {
+      padding: 15px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-primary {
+      background: var(--color-secondary);
+      color: white;
+    }
+    .btn-accent {
+      background: var(--color-accent);
+      color: var(--color-dark);
+    }
+    .btn-secondary {
+      background: var(--color-primary);
+      color: white;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .characters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+    }
+    .character-card {
+      background: rgba(139,69,19,0.05);
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .character-card h4 {
+      color: var(--color-primary);
+      margin-bottom: 8px;
+    }
+    .timeline {
+      position: relative;
+      padding-left: 30px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--color-primary);
+    }
+    .timeline-item {
+      position: relative;
+      padding: 15px 0;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -24px;
+      top: 20px;
+      width: 12px;
+      height: 12px;
+      background: var(--color-secondary);
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="../../index.html" class="nav-logo">📚 ЛитКлуб</a>
+      <div class="nav-links">
+        <a href="../../profile.html">👤 Профиль</a>
+        <span class="nav-badge" id="nav-xp">⭐ 0 XP</span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="work-detail">
+    <div class="work-header">
+      <a href="../index.html" class="back-link">← 5 класс</a>
+      <h1>Дети капитана Гранта</h1>
+      <p style="font-size: 1.2rem; opacity: 0.9;">Жюль Верн • 1868</p>
+      <div class="work-meta">
+        <span class="meta-item">📖 Роман</span>
+        <span class="meta-item">🎮 Есть квест</span>
+        <span class="meta-item">⭐ +50 XP</span>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h2>📋 Краткое содержание</h2>
+      <p>
+        Шотландский лорд Гленарван находит в пойманной акуле бутылку с посланием капитана Гранта, 
+        потерпевшего крушение. Вместе с женой, капитаном корабля и детьми Гранта — Мэри и Робертом — 
+        он отправляется на поиски. Путешествие охватывает Южную Америку, Австралию и Новую Зеландию. 
+        После множества приключений капитан Грант найден на острове Табор.
+      </p>
+    </div>
+
+    <div class="content-section">
+      <h2>✍️ О авторе</h2>
+      <p>
+        <strong>Жюль Верн</strong> (1828–1905) — французский писатель, один из основоположников 
+        жанра научной фантастики. Сочетал романтику приключений с научными фактами. 
+        Автор «Двадцати тысяч льё под водой», «Вокруг света за восемьдесят дней».
+      </p>
+    </div>
+
+    <div class="content-section">
+      <h2>👥 Главные герои</h2>
+      <div class="characters-grid">
+        <div class="character-card">
+          <h4>Лорд Гленарван</h4>
+          <p>Шотландский аристократ, организатор экспедиции</p>
+        </div>
+        <div class="character-card">
+          <h4>Мэри Грант</h4>
+          <p>Дочь капитана Гранта, смелая и решительная</p>
+        </div>
+        <div class="character-card">
+          <h4>Роберт Грант</h4>
+          <p>Сын капитана, мальчик с характером</p>
+        </div>
+        <div class="character-card">
+          <h4>Паганель</h4>
+          <p>Географ, комичный и добрый персонаж</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h2>📝 Темы для сочинений</h2>
+      <ul class="essay-list">
+        <li>Главная идея романа — дружба и преданность. Гленарван и его спутники бросают вызов стихии ради спасения незнакомых людей.</li>
+        <li>Образ Паганеля — комический персонаж, чьи ошибки придают роману лёгкость и юмор.</li>
+        <li>Патриотизм и любовь к родине в образах Мэри и Роберта Грант.</li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>🎯 Действие разворачивается</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <strong>37° южной широты</strong> — находят бутылку в желудке акулы
+        </div>
+        <div class="timeline-item">
+          <strong>Чили и Патагония</strong> — путешествие через Южную Америку
+        </div>
+        <div class="timeline-item">
+          <strong>Остров Троицы</strong> — первое разочарование
+        </div>
+        <div class="timeline-item">
+          <strong>Австралия</strong> — встреча с беном Джойсом
+        </div>
+        <div class="timeline-item">
+          <strong>Новая Зеландия</strong> — опасности и приключения
+        </div>
+        <div class="timeline-item">
+          <strong>Остров Табор</strong> — счастливый финал
+        </div>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn btn-primary" id="mark-read-btn">✓ Отметить прочитанным</button>
+      <a href="../../quest/5/detsi-kapitana-granta/index.html" class="btn btn-accent">🎮 Пройти квест</a>
+      <a href="../../discuss.html?work=detsi-kapitana-granta" class="btn btn-secondary">💬 Обсудить с AI</a>
+    </div>
+  </div>
+
+  <script src="../../js/storage.js"></script>
+  <script>
+    // Update XP display
+    const progress = window.LitClubStorage.getProgress();
+    document.getElementById('nav-xp').textContent = `⭐ ${progress.xp} XP`;
+
+    // Check if already read
+    const isRead = window.LitClubStorage.isWorkRead('detsi-kapitana-granta');
+    const btn = document.getElementById('mark-read-btn');
+    if (isRead) {
+      btn.textContent = '✓ Уже прочитано';
+      btn.style.opacity = '0.7';
+    }
+
+    btn.addEventListener('click', () => {
+      window.LitClubStorage.markWorkRead('detsi-kapitana-granta');
+      btn.textContent = '✓ Уже прочитано';
+      btn.style.opacity = '0.7';
+      
+      const progress = window.LitClubStorage.getProgress();
+      document.getElementById('nav-xp').textContent = `⭐ ${progress.xp} XP`;
+      
+      alert('🎉 +50 XP за прочитанное произведение!');
+    });
+  </script>
+</body>
+</html>

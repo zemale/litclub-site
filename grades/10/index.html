@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10 класс — ЛитКлуб 📚</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/base.css">
+  <style>
+    .grade-header {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-dark));
+      color: var(--color-cream);
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .grade-number {
+      font-size: 5rem;
+      font-weight: 900;
+      line-height: 1;
+      text-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+    }
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .work-card {
+      background: var(--color-paper);
+      border: 2px solid var(--color-primary);
+      border-radius: var(--radius);
+      padding: 25px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .work-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-medium);
+    }
+    .work-card.completed {
+      border-color: var(--color-secondary);
+      background: linear-gradient(135deg, var(--color-paper), rgba(46,139,87,0.1));
+    }
+    .work-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--color-secondary);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .work-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--color-dark);
+      margin-bottom: 8px;
+    }
+    .work-author {
+      color: var(--color-text-light);
+      margin-bottom: 15px;
+    }
+    .work-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .btn {
+      padding: 10px 20px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--color-primary);
+      color: white;
+    }
+    .btn-secondary {
+      background: var(--color-secondary);
+      color: white;
+    }
+    .btn-accent {
+      background: var(--color-accent);
+      color: var(--color-dark);
+    }
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--color-cream);
+      text-decoration: none;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">📚 ЛитКлуб</a>
+      <div class="nav-links">
+        <a href="../profile.html">👤 Профиль</a>
+        <span id="nav-xp" class="nav-badge">⭐ 0 XP</span>
+      </div>
+    </div>
+  </nav>
+
+  <header class="grade-header">
+    <a href="../index.html" class="back-link">← На главную</a>
+    <div class="grade-number">10</div>
+    <h1>класс</h1>
+    <p>Мистика, антиутопии, современная классика</p>
+  </header>
+
+  <main class="works-grid" id="works-container">
+    <div class="loading">Загружаем произведения...</div>
+  </main>
+
+  <script src="../js/storage.js"></script>
+  <script>
+    async function loadWorks() {
+      try {
+        const response = await fetch('../data/works.json');
+        const data = await response.json();
+        const gradeWorks = data.works.filter(w => w.grade === 10);
+        
+        const container = document.getElementById('works-container');
+        const readWorks = window.LitClubStorage.getReadWorks();
+        
+        container.innerHTML = gradeWorks.map(work => {
+          const isCompleted = readWorks.includes(work.id);
+          return `
+            <article class="work-card ${isCompleted ? 'completed' : ''}" data-work-id="${work.id}">
+              ${isCompleted ? '<span class="work-badge">✓ Прочитано</span>' : ''}
+              <h2 class="work-title">${work.title}</h2>
+              <p class="work-author">${work.author}, ${work.year}</p>
+              <p>${work.summary.substring(0, 120)}...</p>
+              <div class="work-actions">
+                <a href="works/${work.id}.html" class="btn btn-primary">📖 Читать</a>
+                ${work.hasQuest ? `<a href="../quest/10/${work.id}/index.html" class="btn btn-secondary">🎮 Квест</a>` : ''}
+                <a href="../discuss.html?work=${work.id}" class="btn btn-accent">💬 Обсудить</a>
+              </div>
+              <div style="margin-top: 10px; font-size: 0.85rem; color: var(--color-accent); font-weight: 700;">+${work.xp} XP</div>
+            </article>
+          `;
+        }).join('');
+        
+        const progress = window.LitClubStorage.getProgress();
+        document.getElementById('nav-xp').textContent = `⭐ ${progress.xp} XP`;
+      } catch (error) {
+        document.getElementById('works-container').innerHTML = '<p>Ошибка загрузки</p>';
+      }
+    }
+    loadWorks();
+  </script>
+</body>
+</html>
